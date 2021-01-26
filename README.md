@@ -13,3 +13,5 @@ System version
 
 This code used Fashion MNIST data.
 
+(This code don't have k-fold cross validation,yet)
+(I will append k-fold cross validation)
