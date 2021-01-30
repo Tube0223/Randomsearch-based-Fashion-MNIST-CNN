@@ -107,7 +107,7 @@ precision 매크로 평균 :  0.7179
 recall 매크로 평균 :  0.7714662489231923
 ```
 
-After reading Kaintels's advice, I pulled this code out of random search code.
+After reading Kaintels's advice, I pulled this code out of random search code.   
 Then, the run time was reduced.
 
 ```
