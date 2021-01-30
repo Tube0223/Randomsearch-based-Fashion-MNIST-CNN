@@ -34,24 +34,24 @@ torch.cuda.manual_seed_all(777)
     
 #tmp_label = torch.zeros(500, 1).cuda()
 
+mnist_train = dsets.FashionMNIST(root='./data', # 다운로드 경로 지정
+                             train=True, # True를 지정하면 훈련 데이터로 다운로드
+                             transform=transforms.ToTensor(), # 텐서로 변환
+                             download=True)
+
+mnist_test = dsets.FashionMNIST(root='./data', # 다운로드 경로 지정
+                            train=False, # False를 지정하면 테스트 데이터로 다운로드
+                            transform=transforms.ToTensor(), # 텐서로 변환
+                            download=True)
+
+#tmp_datas = TensorDataset(mnist_train.data[:500].unsqueeze(1).float(), mnist_train.targets[:500]) # 소음 데이터로 나중에 바꾸기
 
 def objective(trial):
   learning_rate = trial.suggest_uniform("learning_rate", 0.001, 0.01)
   training_epochs = trial.suggest_int("training_epochs", 2, 5)
   batch_size = 500
   layer_number = trial.suggest_int("layer_number", 1,5)
-
-  mnist_train = dsets.FashionMNIST(root='./data', # 다운로드 경로 지정
-                             train=True, # True를 지정하면 훈련 데이터로 다운로드
-                             transform=transforms.ToTensor(), # 텐서로 변환
-                             download=True)
-
-  mnist_test = dsets.FashionMNIST(root='./data', # 다운로드 경로 지정
-                            train=False, # False를 지정하면 테스트 데이터로 다운로드
-                            transform=transforms.ToTensor(), # 텐서로 변환
-                            download=True)
-  #tmp_datas = TensorDataset(mnist_train.data[:500].unsqueeze(1).float(), mnist_train.targets[:500]) # 소음 데이터로 나중에 바꾸기 
-  
+    
   data_loader = torch.utils.data.DataLoader(dataset=mnist_train,
                                             batch_size=batch_size,
                                             shuffle=True,
